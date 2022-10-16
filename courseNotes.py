@@ -68,10 +68,19 @@ def stepThreeFactorial(n):
     else:
         return n * stepThreeFactorial(n-1)
 
+# Example of a solution for fibonacci problem
+
 def fibonacci(n):
     assert n >= 0 and int(n) == n, "The number must be positive integer only!"
     if n in [0, 1]:
         return n
     else:
         return fibonacci(n-1) + fibonacci(n-2)
-print(fibonacci(6))
+
+# Interview Question 
+"""
+1. How to find the sum of digits of a positive integer using recursion?
+Step 1: Recursive case - the flow
+    10 10/10 = 1 and Remainder = 0
+    54 54/10 = 5 and Remainder = 4
+"""
