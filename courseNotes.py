@@ -11,10 +11,17 @@ def powerOfTwoIterative(n):
         n = n - 1
     return result
 """
-POINTS          RECURSION   ITERATION
-Space efficient? No          Yes         No stack memory require in case of iteration
-Time efficient?  No          Yes         In case of recursion system needs more time for pop and push elements to stack memory which makes recursion less time efficient.
-Easy to code?   Yes         NO           We use recursion specially in the cases we known that a problem can be solved by breaking it into smaller problems.
+POINTS              RECURSION   ITERATION
+Space efficient?    No          Yes  
+Time efficient?     No          Yes   
+Easy to code?       Yes         No
+
+-No stack memory require in case of iteration
+-In case of recursion system needs more time for pop and push
+ elements to stack memory which makes recursion less time efficient.
+-We use recursion specially in the cases we known that a problem can
+ be solved by breaking it into smaller problems
+
 """
 # When to Use/avoid Recursion
 """
@@ -23,10 +30,12 @@ When to use it?
 2. When we are fine with the extra overhead that comes with it.
 3. When we need a quick working solution instead of a more efficient one.
 4. When traverse a tree or graph.
-5. When we use memoization in recursion. "Memoization is a technique to store the result of a function call so that we don’t have to calculate it again."
+5. When we use memoization in recursion. "Memoization is a technique to store
+ the result of a function call so that we don’t have to calculate it again."
 When avoid it?
 1. If time ans space complexity is a matters for us.
-2. Recursion uses more memory. If we use embedded memory. For example, an application that runs on a mobile phone.
+2. Recursion uses more memory. If we use embedded memory.
+ For example, an application that runs on a mobile phone.
 3. Recursion can be slow.
 """
 # How to write a recursion in 3 steps?

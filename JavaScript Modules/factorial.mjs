@@ -1,13 +1,12 @@
 // Recursion in JavaScript module
 
 const factorial = (n) => {
-  if (!Number.isInteger(n) || n < 0) {
+  if (!(n >= 0 && parseInt(n) === n))
     throw new Error("Must be a positive integer number");
-  } else if (n === 0) {
-    return 1;
-  } else {
-    return n * factorial(n - 1);
-  }
+  if (n === 0) return 1;
+  else return n * factorial(n - 1);
 };
-console.log(factorial(11));
+
 export default factorial;
+
+console.log(factorial(12));
