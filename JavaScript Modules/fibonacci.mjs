@@ -1,12 +1,21 @@
-// Recursion in JavaScript module
+import { intValidator, promptConsole } from "./utils/utils.mjs";
 
 const fibonacci = (n) => {
-  if (!(n >= 0 && parseInt(n) === n))
-    throw new Error("Parameter must be a positive integer number");
-  if (n === 0 || n === 1) return n;
+  if (n in [0, 1]) return n;
   else return fibonacci(n - 1) + fibonacci(n - 2);
 };
 
-export default fibonacci;
+promptConsole.question(
+  `This module returns the fibonacci number of a given positive integer.\nPlease enter a positive integer: `,
+  (n) => {
+    const { error } = intValidator(n);
+    error == null
+      ? console.log(
+          `The fibonacci number in the ${n} position is ${fibonacci(n)}`
+        )
+      : console.log(error);
+    promptConsole.close();
+  }
+);
 
-console.log(fibonacci(9));
+export default fibonacci;
