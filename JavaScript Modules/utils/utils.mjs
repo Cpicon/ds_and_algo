@@ -1,6 +1,6 @@
-// A validator, for be sure that the input is a positive integer value.
+// The first export is a validator, for be sure that the input is a positive integer value.
 
-// Create a readline interface to prompt the user for input.
+// The second export create a readline interface to prompt the user for input.
 
 import * as readline from 'node:readline'
 
