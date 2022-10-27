@@ -4,9 +4,6 @@ import * as rl from 'node:readline'
 
 export const intValidator = (n, args) => {
   const arrayInput = n
-  // const arrayArgs = args
-  // console.log(arrayInput, arrayArgs)
-  //  .split(',')
   if (args.length !== n.length) {
     return {
       error: `Please enter ${args.length} positive integer(s) separated by a space`
@@ -75,10 +72,8 @@ const argsBehavior = (n, defArgs, answerMessage, callbackAlgorithm) => {
     )
   } else if (process.argv.length === n + 2 && n > 1) {
     const args = process.argv.slice(2)
-    console.log(...args)
     const arrayEvaluated = intValidator([...args], defArgs)
     const errors = arrayEvaluated.filter((item) => item.error)
-    console.log(args, n)
     if (errors.length > 0) {
       return errors.forEach(({ error }) => {
         console.error(error)
@@ -112,7 +107,6 @@ const defaultBehavior = (
         )
       }
       const arrayEvaluated = [...intValidator([...params], defArgs)]
-      console.log(arrayEvaluated)
       const errors = arrayEvaluated.filter((item) => item.error)
 
       if (errors.length > 0) {
