@@ -1,7 +1,7 @@
 import launchConsole from './utils/utils.mjs'
 
-const toBits = (a) => {
-  if (a in [0, 1]) return 'a'
+export const toBits = (a) => {
+  if (a in [0, 1]) return `${a}`
   else return toBits(Math.floor(a / 2)) + String(a % 2)
 }
 launchConsole(
@@ -9,3 +9,5 @@ launchConsole(
   'The binary representation is ',
   toBits
 )
+
+export default toBits
