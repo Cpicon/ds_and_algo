@@ -11,8 +11,9 @@ export const intValidator = (n, args) => {
   } else {
     const ai = arrayInput.map((item) => {
       const number = Number(item)
-      if (!item) return console.error('Empty prompt, enter a positive integer')
-      else if (isNaN(number)) {
+      if (!item) {
+        return console.error('Empty prompt, enter a positive integer')
+      } else if (isNaN(number)) {
         return {
           error: `Invalid input. "${item}" is not a valid number, try again`
         }
@@ -92,8 +93,10 @@ const defaultBehavior = (
   callbackAlgorithm
 ) => {
   // The readline module is used to create an interface for reading data from a Readable stream (such as process.stdin) one line at a time.
-
-  if (process.argv.length === 2) {
+  // console.log(process.argv.length, process.argv, n)
+  if ((n > 1) | !(process.argv.length === n + 2)) {
+    argsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
+  } else if (process.argv.length === 2) {
     const reader = rl.createInterface({
       input: process.stdin,
       output: process.stdout
@@ -120,11 +123,17 @@ const defaultBehavior = (
       reader.close()
     }
     return reader.question(questionMessage, questionCallback)
-  } else if (process.argv.length === 3 && n === 1) {
-    console.log(
-      `${answerMessage} ${callbackAlgorithm(process.argv.slice(2)[0])}`
-    )
-  } else if (n > 1) argsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
+  } else if (process.argv.length === n + 2) {
+    const cliParam = process.argv.slice(2)[0]
+    const cliEvaluated = intValidator([cliParam], [0])
+    if (cliEvaluated[0].error) {
+      console.error(cliEvaluated[0].error)
+    } else {
+      console.log(
+        `${answerMessage} ${callbackAlgorithm(process.argv.slice(2)[0])}`
+      )
+    }
+  }
 }
 
 export const launchConsole = (
