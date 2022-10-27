@@ -24,7 +24,6 @@ export const intValidator = (n, args) => {
     return ai
   }
 }
-// The second export (the default export) is a function that takes three arguments: a string, a  second string and a function. The first string is the message to prompt the user for input, the second string is the message to show the result of the function and the third argument is the function to execute in a CLI when .question() method is called.
 
 /* Function that stringifies a callback function.
   Then, look for the indexes for the first start parenthesis and the first closing parenthesis.
@@ -37,7 +36,7 @@ export const intValidator = (n, args) => {
 
 const asStringify = (cb) => {
   const cbString = cb.toString()
-  const emptyParenthesis = cbString.charAt(cbString.indexOf('(') + 1) === ')'
+  //  const emptyParenthesis = cbString.charAt(cbString.indexOf('(') + 1) === ')'
 
   const arrayProperties = (data) => {
     const [start, end] = [data.indexOf('(') + 1, data.indexOf(')')]
@@ -52,19 +51,22 @@ const asStringify = (cb) => {
     const init = cbString.slice(0, cbString.indexOf('=>'))
     if (init.includes('()')) return arrayProperties('a')
     else if (!(init.includes('(') || init.includes(')'))) {
-      return arrayProperties(`'(${init})'`())
+      return arrayProperties(`'(${init})'`)
     } else return arrayProperties(init.trim())
   } else if (cbString.includes('function')) {
-    if (emptyParenthesis) return arrayProperties('a')
-    const init = cbString.slice(
-      cbString.indexOf('(') + 1,
-      cbString.indexOf(')')
-    )
-    return arrayProperties(init.trim())
+    const init = cbString.slice(0, cbString.indexOf(')' + 1))
+    if (init.includes('()')) return arrayProperties('a')
+    else if (!(init.includes('(') || init.includes(')'))) {
+      return arrayProperties(`'(${init})'`)
+    } else return arrayProperties(init.trim())
   }
 }
 
-const argsBehavior = (n, defArgs, answerMessage, callbackAlgorithm) => {
+/*
+ This function tries to resolve the problem of the arguments passed to the callback function, when the callback function has more than one argument.
+ */
+
+const multipleArgsBehavior = (n, defArgs, answerMessage, callbackAlgorithm) => {
   if (process.argv.length > n + 2) {
     console.error(`Too many arguments, please enter only ${n} positive integer`)
   } else if (process.argv.length < n + 2) {
@@ -85,6 +87,9 @@ const argsBehavior = (n, defArgs, answerMessage, callbackAlgorithm) => {
   }
 }
 
+/* This function execute the callback function with one argument, which passed in the command line For more arguments, it will the function argsBehavior will executed.
+ */
+
 const defaultBehavior = (
   n = 1,
   defArgs,
@@ -92,10 +97,8 @@ const defaultBehavior = (
   questionMessage,
   callbackAlgorithm
 ) => {
-  // The readline module is used to create an interface for reading data from a Readable stream (such as process.stdin) one line at a time.
-  // console.log(process.argv.length, process.argv, n)
   if ((n > 1) | !(process.argv.length === n + 2)) {
-    argsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
+    multipleArgsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
   } else if (process.argv.length === 2) {
     const reader = rl.createInterface({
       input: process.stdin,
@@ -135,6 +138,8 @@ const defaultBehavior = (
     }
   }
 }
+
+// The second export (the default export) is a function that takes three arguments: a string, a  second string and a function. The first string is the message to prompt the user for input, the second string is the message to show the result of the function and the third argument is the function to execute in a CLI when .question() method is called.
 
 export const launchConsole = (
   questionMessage,
