@@ -97,7 +97,7 @@ const defaultBehavior = (
   questionMessage,
   callbackAlgorithm
 ) => {
-  if ((n > 1) | !(process.argv.length === n + 2)) {
+  if (n > 1 || !(process.argv.length === n + 2)) {
     multipleArgsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
   } else if (process.argv.length === 2) {
     const reader = rl.createInterface({
