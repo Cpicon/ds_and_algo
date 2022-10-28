@@ -69,7 +69,7 @@ const asStringify = (cb) => {
 const multipleArgsBehavior = (n, defArgs, answerMessage, callbackAlgorithm) => {
   if (process.argv.length > n + 2) {
     console.error(`Too many arguments, please enter only ${n} positive integer`)
-  } else if (process.argv.length < n + 2) {
+  } else if (process.argv.length < n) {
     console.error(
       `Too few arguments, please enter ${n} positive integer separated by a space`
     )
@@ -97,22 +97,23 @@ const defaultBehavior = (
   questionMessage,
   callbackAlgorithm
 ) => {
-  if (n > 1 || !(process.argv.length === n + 2)) {
-    multipleArgsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
-  } else if (process.argv.length === 2) {
+  // if (n > 1 || !(process.argv.length === n + 2)) {
+  //   multipleArgsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
+  // } else
+  if (process.argv.length === 2) {
     const reader = rl.createInterface({
       input: process.stdin,
       output: process.stdout
     })
     const questionCallback = (n) => {
-      const params = n.split(' ')
+      const params = n.trim().split(' ')
       if (params.length !== defArgs.length) {
         reader.close()
         return console.log(
           `Invalid input.\nTry again with ${defArgs.length} positive integer separated by a space`
         )
       }
-      const arrayEvaluated = [...intValidator([...params], defArgs)]
+      const arrayEvaluated = intValidator([...params], defArgs)
       const errors = arrayEvaluated.filter((item) => item.error)
 
       if (errors.length > 0) {
@@ -126,6 +127,8 @@ const defaultBehavior = (
       reader.close()
     }
     return reader.question(questionMessage, questionCallback)
+  } else if (n > 1 || !(process.argv.length === n + 2)) {
+    multipleArgsBehavior(n, defArgs, answerMessage, callbackAlgorithm)
   } else if (process.argv.length === n + 2) {
     const cliParam = process.argv.slice(2)[0]
     const cliEvaluated = intValidator([cliParam], [0])
