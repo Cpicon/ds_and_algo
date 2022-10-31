@@ -103,7 +103,9 @@ const _inputValidator = (p: arr | null) => {
 }
 
 const shouldProceed = () => {
-  const shouldProceed = confirm(italic(rgb8(`Do you want to try again?`, 10)))
+  const shouldProceed = confirm(
+    '\n' + italic(rgb8(`Do you want to try again?`, 10))
+  )
   if (shouldProceed) {
     _args = []
     cliImplement(_m1, _m2, _cb)
