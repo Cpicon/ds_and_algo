@@ -1,4 +1,4 @@
-import launchConsole from './utils.ts'
+import launchConsole from './utils/utils.ts'
 export const gcd = (a: number, b: number): number => {
   if (b === 0) return a
   return gcd(b, a % b)
@@ -7,7 +7,6 @@ export const gcd = (a: number, b: number): number => {
 launchConsole(
   'Please enter two positive integers separated by a space: ',
   'The greatest common divisor is ',
-  gcd,
-  2
+  gcd
 )
 export default gcd
