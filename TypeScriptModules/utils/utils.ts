@@ -56,16 +56,16 @@ const cliUserPrompt = (
   alert(
     'Welcome to utils, remember that you can exit any time with Ctrl + C or Command + C.'
   )
-  const p: string | null = prompt(welcomeMessage)
+  const p: string | null = prompt('\n' + welcomeMessage)
   const validData = _inputValidator(typeof p === 'string' ? p.trim() : null)
   if (!validData) userError(p)
   else if (typeof validData === 'object' && validData.length !== np) {
     numbArgsChecker(p, validData)
   } else if (validData && typeof validData === 'number') {
-    console.log(promptMessage, callback(validData))
+    console.log('\n' + promptMessage, callback(validData))
     return shouldProceed()
   } else if (typeof validData === 'object' && validData.length === np) {
-    console.log(promptMessage, callback(...validData.flat()))
+    console.log('\n' + promptMessage, callback(...validData.flat()))
     return shouldProceed()
   }
 }
@@ -75,12 +75,12 @@ const cliArgsBehavior = () => {
   if (!validData) {
     numbArgsChecker(_args.toString(), _args)
   } else if (typeof validData === 'number') {
-    console.log(_m2, _cb(validData))
+    console.log('\n' + _m2, _cb(validData))
     return shouldProceed()
   } else if (typeof validData === 'object' && validData.length !== _np) {
     numbArgsChecker(validData.toString(), _args)
   } else if (typeof validData === 'object' && validData.length === _np) {
-    console.log(_m2, _cb(...validData.flat()))
+    console.log('\n' + _m2, _cb(...validData.flat()))
     return shouldProceed()
   }
 }

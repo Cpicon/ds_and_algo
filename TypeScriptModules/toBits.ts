@@ -5,7 +5,7 @@ export const toBits = (a: number): string => {
   else return toBits(Math.floor(a / 2)) + String(a % 2)
 }
 launchConsole(
-  ' This module returns the binary representation of a given positive integer.\nPlease enter a positive integer: ',
+  'This module returns the binary representation of a given positive integer.\n\nPlease enter a positive integer: ',
   'The binary representation is ',
   toBits
 )
